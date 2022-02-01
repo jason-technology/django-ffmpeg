@@ -14,6 +14,7 @@ pathlist = Path(scan_dir).glob('**/*.*')
 for path in pathlist:
     # because path is object not string
     extension = str(path.suffix)
+    print(extension)
     if extension not in extensions:
         extensions.append(extension)
         
