@@ -14,7 +14,8 @@ valid_extensions = [
     '.m4v',
     '.avi',
     '.mpg',
-    '.mpeg'
+    '.mpeg',
+    '.mkv'
 ]
 
 #recursive scan of all files
