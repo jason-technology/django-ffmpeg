@@ -1,10 +1,11 @@
 import requests
 from pathlib import Path
 
-target_uri = "http://localhost:8000/ffmpeg/getMediaInfo"
+target_uri = "http://192.168.0.99:8000/ffmpeg/getMediaInfo"
 
 #scan_dir = '/Users/Jason/Projects/mediamanager'
-scan_dir = '/mnt/media/Movie/Apex (2021)/'
+#scan_dir = '/mnt/media/Movie/Apex (2021)/'
+scan_dir = '/mnt/media/Movie/Return of the Living Dead- Rave to the Grave (2005)'
 
 
 valid_extensions = [
