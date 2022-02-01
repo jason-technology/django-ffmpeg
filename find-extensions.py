@@ -9,6 +9,7 @@ extensions = []
 pathlist = Path(scan_dir).glob('**/*.*')
 for path in pathlist:
     # because path is object not string
+    print(path)
     extension = str(path.suffix)
     if extension not in extensions:
         extensions.append(extension)
