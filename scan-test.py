@@ -1,7 +1,5 @@
-import requests, sys
+import requests
 from pathlib import Path
-
-arg_line = " ".join(sys.argv[1:])
 
 target_uri = "http://localhost:8000/ffmpeg/getMediaInfo"
 
@@ -9,34 +7,17 @@ target_uri = "http://localhost:8000/ffmpeg/getMediaInfo"
 scan_dir = '/mnt/media/Movie/Apex (2021)/'
 
 
-valid_extensions = [
-    '.mp4',
-    '.m4v',
-    '.avi',
-    '.mpg',
-    '.mpeg',
-    '.mkv'
-]
+extensions = []
 
 #recursive scan of all files
 pathlist = Path(scan_dir).glob('**/*.*')
 for path in pathlist:
     # because path is object not string
+    extension = str(path.suffix)
+    if extension not in extensions:
+        extensions.append(extension)
+        
+
+for extension in extensions:
+    print(extension)
     
-    for extension in valid_extensions:
-        if str(path.suffix) == extension:
-            path_in_str = str(path)
-            post_data = {"target": path_in_str}
-            response = requests.get(target_uri, data = post_data)
-            print(response.json())
-
-#for target in scan_targets:
-
-    #post_data = {
-    #    "target": target
-    #}
-
-    #response = requests.get(target_uri, data = post_data)
-
-    #print(response.json())
-
