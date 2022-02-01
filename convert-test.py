@@ -14,7 +14,7 @@ c = Converter()
 
 info = c.probe(inFile)
 
-print(info.__dict__["streams"][1].__dict__)
+print(info.__dict__["streams"][0].__dict__)
 
 
 def SerializeMediaInfo(mediaInfo):
@@ -34,7 +34,7 @@ def SerializeMediaInfo(mediaInfo):
         "fingerprint": fileFingerprint
     }
     
-    return json.dumps(serializedMediaInfo)
+    #return json.dumps(serializedMediaInfo)
 
 
 #json_info = SerializeMediaInfo(info)
