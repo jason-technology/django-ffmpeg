@@ -8,8 +8,6 @@ target_uri = "http://localhost:8000/ffmpeg/getMediaInfo"
 #scan_dir = '/Users/Jason/Projects/mediamanager'
 scan_dir = '/mnt/media/Movie/Apex (2021)/'
 
-    
-scan_dir = arg_line[0]
 
 valid_extensions = [
     '.mp4',
