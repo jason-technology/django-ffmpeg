@@ -17,23 +17,35 @@ def SerializeMediaFile(inFile):
     
     serializedMediaInfo = {
         "audio_codec": mediaInfo.__dict__["streams"][0].__dict__["codec"],
-        "audio_bitrate": int(mediaInfo.__dict__["streams"][0].__dict__["bitrate"]),
-        "audio_samplerate": int(mediaInfo.__dict__["streams"][0].__dict__["audio_samplerate"]),
+        "audio_bitrate": mediaInfo.__dict__["streams"][0].__dict__["bitrate"],
+        "audio_samplerate": mediaInfo.__dict__["streams"][0].__dict__["audio_samplerate"],
         "video_codec": mediaInfo.__dict__["streams"][1].__dict__["codec"],
         "video_width": mediaInfo.__dict__["streams"][1].__dict__["video_width"],
         "video_height": mediaInfo.__dict__["streams"][1].__dict__["video_height"],
-        "video_bitrate": int(mediaInfo.__dict__["streams"][1].__dict__["bitrate"]),
-        "video_fps": int(mediaInfo.__dict__["streams"][1].__dict__["video_fps"]),
+        "video_bitrate": mediaInfo.__dict__["streams"][1].__dict__["bitrate"],
+        "video_fps": mediaInfo.__dict__["streams"][1].__dict__["video_fps"],
         "filename": fileName,
         "filepath": filePath,
-        "minutes": int(mediaInfo.__dict__["format"].__dict__["duration"]),
-        "size": int(mediaInfo.__dict__["format"].__dict__["size"]),
-        "bitrate": int(mediaInfo.__dict__["format"].__dict__["bitrate"]),
+        "minutes": mediaInfo.__dict__["format"].__dict__["duration"],
+        "size": mediaInfo.__dict__["format"].__dict__["size"],
+        "bitrate": mediaInfo.__dict__["format"].__dict__["bitrate"],
         "fingerprint": str(fileFingerprint.hexdigest()),
-        "kbpm": int(mediaInfo.__dict__["format"].__dict__["size"] / mediaInfo.__dict__["format"].__dict__["duration"])
+        "kbpm": mediaInfo.__dict__["format"].__dict__["size"] / mediaInfo.__dict__["format"].__dict__["duration"]
     }
     
-    
+    if serializedMediaInfo["audio_bitrate"] is not None:
+        serializedMediaInfo["audio_bitrate"] = int(serializedMediaInfo["audio_bitrate"])
+    if serializedMediaInfo["audio_samplerate"] is not None:
+        serializedMediaInfo["audio_samplerate"] = int(serializedMediaInfo["audio_samplerate"])
+    if serializedMediaInfo["video_fps"] is not None:
+        serializedMediaInfo["video_fps"] = int(serializedMediaInfo["video_fps"])
+    if serializedMediaInfo["minutes"] is not None:
+        serializedMediaInfo["minutes"] = int(serializedMediaInfo["minutes"])
+    if serializedMediaInfo["kbpm"] is not None:
+        serializedMediaInfo["kbpm"] = int(serializedMediaInfo["kbpm"])       
+        
+        
+        
     serializedMediaFile = MediaSerializer(data=serializedMediaInfo)
     
     serializedMediaFile.is_valid(raise_exception=True)
