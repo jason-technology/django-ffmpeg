@@ -12,7 +12,7 @@ filePath = os.path.dirname(inFile)
 
 c = Converter()
 
-info = c.probe(fileName)
+info = c.probe(inFile)
 
 print(info.__dict__["streams"][1].__dict__)
 
@@ -34,13 +34,12 @@ def SerializeMediaInfo(mediaInfo):
         "fingerprint": fileFingerprint
     }
     
-    
     return json.dumps(serializedMediaInfo)
 
 
-json_info = SerializeMediaInfo(info)
+#json_info = SerializeMediaInfo(info)
 
-print(json_info)
+#print(json_info)
 
 #fileFingerprint = subprocess.check_output(['md5','-q', '-s', json_info], encoding='utf8', text=True)
 
