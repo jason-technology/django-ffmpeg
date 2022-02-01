@@ -11,11 +11,14 @@ class MediaFile(models.Model):
   audio_bitrate = models.IntegerField(default=0)
   audio_samplerate = models.IntegerField(default=0)
   video_codec = models.CharField(max_length=20, blank=True, null=True)
+  video_width = models.IntegerField(default=0)
+  video_height = models.IntegerField(default=0)
   video_bitrate = models.IntegerField(default=0)
   video_fps = models.IntegerField(default=0)
   minutes = models.IntegerField(default=0)
   lastscan = models.DateField(auto_now=True)
   fingerprint = models.CharField(unique=True, max_length=255, blank=True, null=True)
+  kbpm = models.IntegerField(default=0)
   
   # This def causes object to show as Title in the admin UI instead of Object_1
   def __str__(self):

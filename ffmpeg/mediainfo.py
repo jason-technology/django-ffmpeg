@@ -20,6 +20,8 @@ def SerializeMediaFile(inFile):
         "audio_bitrate": int(mediaInfo.__dict__["streams"][0].__dict__["bitrate"]),
         "audio_samplerate": int(mediaInfo.__dict__["streams"][0].__dict__["audio_samplerate"]),
         "video_codec": mediaInfo.__dict__["streams"][1].__dict__["codec"],
+        "video_width": mediaInfo.__dict__["streams"][1].__dict__["video_width"],
+        "video_height": mediaInfo.__dict__["streams"][1].__dict__["video_height"],
         "video_bitrate": int(mediaInfo.__dict__["streams"][1].__dict__["bitrate"]),
         "video_fps": int(mediaInfo.__dict__["streams"][1].__dict__["video_fps"]),
         "filename": fileName,
@@ -28,6 +30,7 @@ def SerializeMediaFile(inFile):
         "size": int(mediaInfo.__dict__["format"].__dict__["size"]),
         "bitrate": int(mediaInfo.__dict__["format"].__dict__["bitrate"]),
         "fingerprint": str(fileFingerprint.hexdigest()),
+        "kbpm": int(mediaInfo.__dict__["format"].__dict__["size"] / mediaInfo.__dict__["format"].__dict__["duration"])
     }
     
     

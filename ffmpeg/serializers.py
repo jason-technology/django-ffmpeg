@@ -17,10 +17,13 @@ class MediaSerializer(serializers.ModelSerializer):
         "audio_bitrate",
         "audio_samplerate",
         "video_codec",
+        "video_width",
+        "video_height",
         "video_bitrate",
         "video_fps",
         "lastscan",
         "fingerprint",
+        "kbpm",
     ]
 
     extra_kwargs = {
@@ -35,6 +38,8 @@ class MediaSerializer(serializers.ModelSerializer):
         "audio_bitrate": {"required": False},
         "audio_samplerate": {"required": False},
         "video_codec": {"required": False},
+        "video_width": {"required": False},
+        "video_height": {"required": False},
         "video_bitrate": {"required": False},
         "video_fps": {"required": False},
         "lastscan": {"required": False},
