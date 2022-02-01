@@ -1,3 +1,4 @@
+#!python
 from converter import Converter
 import json, os, subprocess
 
@@ -21,23 +22,16 @@ def SerializeMediaInfo(mediaInfo):
     fileFingerprint = myProcess.replace("\n","")
     
     serializedMediaInfo = {
-        "audio": {
-            "codec": mediaInfo.__dict__["streams"][0].__dict__["codec"],
-            "bitrate": mediaInfo.__dict__["streams"][0].__dict__["bitrate"],
-            "sample_rate": mediaInfo.__dict__["streams"][0].__dict__["audio_samplerate"]
-        },
-        "video": {
-            "codec": mediaInfo.__dict__["streams"][1].__dict__["codec"],
-            "bitrate": mediaInfo.__dict__["streams"][1].__dict__["bitrate"],
-            "fps": mediaInfo.__dict__["streams"][1].__dict__["video_fps"]
-
-        },
-        "meta": {
-            "minutes": mediaInfo.__dict__["format"].__dict__["duration"],
-            "size": mediaInfo.__dict__["format"].__dict__["size"],
-            "bitrate": mediaInfo.__dict__["format"].__dict__["bitrate"],
-            "fingerprint": fileFingerprint
-        }
+        "codec": mediaInfo.__dict__["streams"][0].__dict__["codec"],
+        "bitrate": mediaInfo.__dict__["streams"][0].__dict__["bitrate"],
+        "sample_rate": mediaInfo.__dict__["streams"][0].__dict__["audio_samplerate"],
+        "codec": mediaInfo.__dict__["streams"][1].__dict__["codec"],
+        "bitrate": mediaInfo.__dict__["streams"][1].__dict__["bitrate"],
+        "fps": mediaInfo.__dict__["streams"][1].__dict__["video_fps"],
+        "minutes": mediaInfo.__dict__["format"].__dict__["duration"],
+        "size": mediaInfo.__dict__["format"].__dict__["size"],
+        "bitrate": mediaInfo.__dict__["format"].__dict__["bitrate"],
+        "fingerprint": fileFingerprint
     }
     
     
