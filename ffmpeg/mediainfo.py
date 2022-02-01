@@ -15,15 +15,26 @@ def SerializeMediaFile(inFile):
     #fileFingerprint = myProcess.replace("\n","")
     fileFingerprint = hashlib.sha1(str(mediaInfo).encode())
     
+    #Determine which stream is audio and video
+    streamTest = mediaInfo.__dict__["streams"][0].__dict__["type"]
+    
+    if streamTest == "video":
+        videoStream = 0
+        audioStream = 1
+    else:
+        videoStream = 1
+        audioStream = 0
+    
+    
     serializedMediaInfo = {
-        "audio_codec": mediaInfo.__dict__["streams"][0].__dict__["codec"],
-        "audio_bitrate": mediaInfo.__dict__["streams"][0].__dict__["bitrate"],
-        "audio_samplerate": mediaInfo.__dict__["streams"][0].__dict__["audio_samplerate"],
-        "video_codec": mediaInfo.__dict__["streams"][1].__dict__["codec"],
-        "video_width": mediaInfo.__dict__["streams"][1].__dict__["video_width"],
-        "video_height": mediaInfo.__dict__["streams"][1].__dict__["video_height"],
-        "video_bitrate": mediaInfo.__dict__["streams"][1].__dict__["bitrate"],
-        "video_fps": mediaInfo.__dict__["streams"][1].__dict__["video_fps"],
+        "audio_codec": mediaInfo.__dict__["streams"][audioStream].__dict__["codec"],
+        "audio_bitrate": mediaInfo.__dict__["streams"][audioStream].__dict__["bitrate"],
+        "audio_samplerate": mediaInfo.__dict__["streams"][audioStream].__dict__["audio_samplerate"],
+        "video_codec": mediaInfo.__dict__["streams"][videoStream].__dict__["codec"],
+        "video_width": mediaInfo.__dict__["streams"][videoStream].__dict__["video_width"],
+        "video_height": mediaInfo.__dict__["streams"][videoStream].__dict__["video_height"],
+        "video_bitrate": mediaInfo.__dict__["streams"][videoStream].__dict__["bitrate"],
+        "video_fps": mediaInfo.__dict__["streams"][videoStream].__dict__["video_fps"],
         "filename": fileName,
         "filepath": filePath,
         "minutes": mediaInfo.__dict__["format"].__dict__["duration"],
