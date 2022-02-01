@@ -1,11 +1,9 @@
 from converter import Converter
-import json, os, subprocess
-from datetime import datetime
+import json, os, hashlib
+#from .models import MediaFile
+from .serializers import MediaSerializer
 
-
-def SerializeMediaInfo(inFile):
-    
-    now = datetime.now()
+def SerializeMediaFile(inFile):
     
     fileName = os.path.basename(inFile)
     filePath = os.path.dirname(inFile)
@@ -13,8 +11,9 @@ def SerializeMediaInfo(inFile):
     #inFile = '/Users/Jason/Projects/mediamanager/1_min_later.m4v'
     mediaInfo = c.probe(inFile)
     
-    myProcess = subprocess.check_output(['md5','-q', '-s', str(mediaInfo)], encoding='utf8', text=True)
-    fileFingerprint = myProcess.replace("\n","")
+    #myProcess = subprocess.check_output(['md5','-q', '-s', str(mediaInfo)], encoding='utf8', text=True)
+    #fileFingerprint = myProcess.replace("\n","")
+    fileFingerprint = hashlib.sha1(str(mediaInfo).encode())
     
     serializedMediaInfo = {
         "audio_codec": mediaInfo.__dict__["streams"][0].__dict__["codec"],
@@ -28,14 +27,16 @@ def SerializeMediaInfo(inFile):
         "minutes": int(mediaInfo.__dict__["format"].__dict__["duration"]),
         "size": int(mediaInfo.__dict__["format"].__dict__["size"]),
         "bitrate": int(mediaInfo.__dict__["format"].__dict__["bitrate"]),
-        "fingerprint": fileFingerprint,
-        #"lastscan": str(now)
+        "fingerprint": str(fileFingerprint.hexdigest()),
     }
     
     
-    #return json.dumps(serializedMediaInfo)
-    return serializedMediaInfo
-
+    serializedMediaFile = MediaSerializer(data=serializedMediaInfo)
+    
+    serializedMediaFile.is_valid(raise_exception=True)
+    serializedMediaFile.save()
+    
+    return serializedMediaFile.data
 
 
 #inFile = '/Users/Jason/Projects/mediamanager/1_min_later.m4v'

@@ -1,4 +1,6 @@
 from rest_framework import serializers
+from rest_framework.validators import UniqueValidator
+
 from .models import MediaFile
 
 class MediaSerializer(serializers.ModelSerializer):
@@ -9,6 +11,7 @@ class MediaSerializer(serializers.ModelSerializer):
         "filename",
         "filepath",
         "size",
+        "bitrate",
         "minutes",
         "audio_codec",
         "audio_bitrate",
@@ -19,12 +22,14 @@ class MediaSerializer(serializers.ModelSerializer):
         "lastscan",
         "fingerprint",
     ]
+
     extra_kwargs = {
         "audio_codec": {"required": False},
         "lastscan": {"required": False},
         "filename": {"required": False},
         "filepath": {"required": False},
         "size": {"required": False},
+        "bitrate": {"required": False},
         "minutes": {"required": False},
         "audio_codec": {"required": False},
         "audio_bitrate": {"required": False},

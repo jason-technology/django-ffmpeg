@@ -13,7 +13,7 @@ import subprocess
 from .models import MediaFile
 from .serializers import MediaSerializer
 
-from .mediainfo import SerializeMediaInfo
+from .mediainfo import SerializeMediaFile
 
 # Create your views here.
 class MediaFiles(generics.ListCreateAPIView):
@@ -59,11 +59,11 @@ class GetMediaInfo(APIView):
     
     def get(self, request, format=None):
         inFile = request.data.get('target')
-        mediaInfo = SerializeMediaInfo(inFile)
-        #mediaInfo = SerializeMediaInfo('/Users/Jason/Projects/mediamanager/1_min_later.m4v')
+            
+        mediaInfo = SerializeMediaFile(inFile)
         
-        if request.data.get('save') == "True":
-            MediaFiles(mediaInfo)
+        #if request.data.get('save') == "True":
+        #    MediaFiles(mediaInfo)
         
         return Response(mediaInfo)
     
