@@ -10,14 +10,19 @@ from rest_framework.renderers import TemplateHTMLRenderer
 
 import subprocess
 
-from .models import MediaFile
-from .serializers import MediaSerializer
+from .models import MediaFile, InvalidMediaFile
+from .serializers import MediaSerializer, InvalidMediaSerializer
 
 from .mediainfo import SerializeMediaFile
 
 # Create your views here.
 class MediaFiles(generics.ListCreateAPIView):
     queryset = MediaFile.objects.all()
+    serializer_class = MediaSerializer
+    #permission_classes = [permissions.IsAuthenticatedOrReadOnly]
+    
+class InvalidMediaFiles(generics.ListCreateAPIView):
+    queryset = InvalidMediaFile.objects.all()
     serializer_class = MediaSerializer
     #permission_classes = [permissions.IsAuthenticatedOrReadOnly]
     
