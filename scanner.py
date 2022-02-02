@@ -6,8 +6,6 @@ scan_dir = '/mnt/media/Television/'
 
 target_uri = "http://localhost:8000/ffmpeg/getMediaInfo"
 
-extensions = []
-
 valid_extensions = [
     '.mp4',
     '.m4v',
@@ -36,11 +34,6 @@ def try_loop(g):
 for file in try_loop(Path(scan_dir).glob('**/*.*')):
     print(file)
     extension = str(file.suffix)
-    if extension not in extensions:
-        extensions.append(extension)
-        
 
-for extension in extensions:
-    print(extension)
 
     
