@@ -36,14 +36,14 @@ def try_loop(g):
 
 for path in try_loop(Path(scan_dir).glob('**/*.*')):
 
-
+    print(path)
 #recursive scan of all files
 #pathlist = Path(scan_dir).glob('**/*.*')
 #for path in pathlist:
     # because path is object not string
     for extension in valid_extensions:
         if str(path.suffix) == extension:
-            print(path)
+            
             path_in_str = str(path)
             post_data = {"target": path_in_str}
             #response = requests.get(target_uri, data = post_data)
