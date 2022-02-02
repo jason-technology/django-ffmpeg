@@ -22,4 +22,4 @@ class MediaFile(models.Model):
   
   # This def causes object to show as Title in the admin UI instead of Object_1
   def __str__(self):
-    return self.fingerprint
+    return self.filename
