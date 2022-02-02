@@ -25,7 +25,7 @@ valid_extensions = [
 pathlist = Path(scan_dir).glob('**/*.*')
 for path in pathlist:
     # because path is object not string
-    
+    print(path)
     for extension in valid_extensions:
         if str(path.suffix) == extension:
             path_in_str = str(path)
