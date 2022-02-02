@@ -5,7 +5,7 @@ target_uri = "http://localhost:8000/ffmpeg/getMediaInfo"
 
 #scan_dir = '/Users/Jason/Projects/mediamanager'
 #scan_dir = '/mnt/media/Movie/Apex (2021)/'
-scan_dir = '/mnt/media/Televison'
+scan_dir = '/mnt/media/Televison/'
 
 
 valid_extensions = [
@@ -32,14 +32,4 @@ for path in pathlist:
             post_data = {"target": path_in_str}
             response = requests.get(target_uri, data = post_data)
             print(response.json())
-
-#for target in scan_targets:
-
-    #post_data = {
-    #    "target": target
-    #}
-
-    #response = requests.get(target_uri, data = post_data)
-
-    #print(response.json())
 
