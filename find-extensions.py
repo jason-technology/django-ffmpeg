@@ -8,7 +8,8 @@ def try_loop(g):
         try:
             yield next(g)
         except StopIteration:
-            break
+            #break
+            continue
         except OSError as e:
             # log error
             continue
