@@ -1,6 +1,6 @@
 from pathlib import Path
 import requests
-from .ffmpeg.mediainfo import SerializeMediaFile
+from ffmpeg.mediainfo import SerializeMediaFile
 
 #scan_dir = '/Users/Jason/Projects/mediamanager'
 scan_dir = '/mnt/media/Television/'
