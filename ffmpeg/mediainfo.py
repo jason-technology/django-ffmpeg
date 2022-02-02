@@ -65,13 +65,16 @@ def SerializeMediaFile(inFile):
      
     serializedMediaFile = MediaSerializer(data=serializedMediaInfo)
     
-    try:
-        serializedMediaFile.is_valid(raise_exception=True)
-    except:
-        return SerializeMediaFile.errors
+    #try:
+    #    serializedMediaFile.is_valid(raise_exception=True)
+    #except:
+    #    return SerializeMediaFile.errors
     
-    serializedMediaFile.save()
-    return serializedMediaFile.data
+    if serializedMediaFile.is_valid():
+        serializedMediaFile.save()
+        return serializedMediaFile.data
+    else:
+        return serializedMediaFile.errors
 
 
 #inFile = '/Users/Jason/Projects/mediamanager/1_min_later.m4v'
