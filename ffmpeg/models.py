@@ -29,6 +29,7 @@ class InvalidMediaFile(models.Model):
   filepath = models.CharField(max_length=255)
   scandate = models.DateField(auto_now=True)
   status = models.CharField(max_length=255)
+  fingerprint = models.CharField(unique=True, max_length=255, blank=True, null=True)
     
   # This def causes object to show as Title in the admin UI instead of Object_1
   def __str__(self):

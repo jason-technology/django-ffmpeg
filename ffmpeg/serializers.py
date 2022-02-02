@@ -58,6 +58,7 @@ class InvalidMediaSerializer(serializers.ModelSerializer):
         "filepath",
         "scandate",
         "status",
+        "fingerprint",
     ]
 
     extra_kwargs = {
@@ -65,4 +66,5 @@ class InvalidMediaSerializer(serializers.ModelSerializer):
         "filepath": {"required": True},
         "lastscan": {"required": True},
         "status": {"required": True},
+        "fingerprint": {"required": True},
     }
