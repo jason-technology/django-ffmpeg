@@ -23,7 +23,9 @@ def SerializeMediaFile(inFile):
         else:
             videoStream = 1
             audioStream = 0
-            validMediaFile = True
+        
+        validMediaFile = True
+        
     except:
         validMediaFile = False
         
