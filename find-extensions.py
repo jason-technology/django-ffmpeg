@@ -10,12 +10,13 @@ def try_loop(g):
         except StopIteration:
             #break
             continue
+            #pass
         except OSError as e:
             # log error
             continue
 
 #for file in try_loop(pathlib.Path(r'\\path\to\shared\folder').rglob('*.foo')):
-for file in try_loop(Path(scan_dir).rglob('**/*.*')):
+for file in try_loop(Path(scan_dir).glob('**/*.*')):
     print(file)
     pass
 
