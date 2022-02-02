@@ -1,7 +1,10 @@
 from pathlib import Path
+import requests
 
 #scan_dir = '/Users/Jason/Projects/mediamanager'
 scan_dir = '/mnt/media/Television/'
+
+target_uri = "http://localhost:8000/ffmpeg/getMediaInfo"
 
 extensions = []
 
