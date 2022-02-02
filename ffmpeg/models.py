@@ -23,3 +23,13 @@ class MediaFile(models.Model):
   # This def causes object to show as Title in the admin UI instead of Object_1
   def __str__(self):
     return self.filename
+  
+class InvalidMediaFile(models.Model):
+  filename = models.CharField(max_length=255)
+  filepath = models.CharField(max_length=255)
+  scandate = models.DateField(auto_now=True)
+  status = models.CharField(max_length=255)
+    
+  # This def causes object to show as Title in the admin UI instead of Object_1
+  def __str__(self):
+    return self.filename

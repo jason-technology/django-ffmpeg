@@ -1,7 +1,7 @@
 from rest_framework import serializers
 from rest_framework.validators import UniqueValidator
 
-from .models import MediaFile
+from .models import MediaFile, InvalidMediaFile
 
 class MediaSerializer(serializers.ModelSerializer):
   class Meta:
@@ -46,3 +46,23 @@ class MediaSerializer(serializers.ModelSerializer):
         "fingerprint": {"required": True},
     }
     
+    
+    
+class InvalidMediaSerializer(serializers.ModelSerializer):
+  class Meta:
+    model = InvalidMediaFile
+    fields = [
+        "pk",
+        "filename",
+        "filepath",
+        "filepath",
+        "scandate",
+        "status",
+    ]
+
+    extra_kwargs = {
+        "filename": {"required": True},
+        "filepath": {"required": True},
+        "lastscan": {"required": True},
+        "status": {"required": True},
+    }

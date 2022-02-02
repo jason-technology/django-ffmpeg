@@ -42,6 +42,7 @@ for file in try_loop(Path(scan_dir).glob('**/*.*')):
             post_data = {"target": path_in_str}
             #response = requests.get(target_uri, data = post_data)
             response = SerializeMediaFile(path_in_str)
-            print(response.json())
+            #print(response.json())
+            print()
 
     

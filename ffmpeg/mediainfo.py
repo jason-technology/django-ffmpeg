@@ -1,7 +1,7 @@
 from converter import Converter
 import json, os, hashlib
 
-from .serializers import MediaSerializer
+from .serializers import MediaSerializer, InvalidMediaSerializer
 
 def SerializeMediaFile(inFile):
     
@@ -26,6 +26,7 @@ def SerializeMediaFile(inFile):
             validMediaFile = True
     except:
         validMediaFile = False
+        
         print("not a valid media file")
     
 
@@ -74,7 +75,18 @@ def SerializeMediaFile(inFile):
         serializedMediaFile.save()
         return serializedMediaFile.data
     else:
-        return serializedMediaFile.errors
+        invalidFileData = {
+            'filename': fileName,
+            'filepath': filePath,
+            'status': "Invalid media file"
+        }
+        
+        invalidFileRecord = InvalidMediaSerializer(data=invalidFileData)
+        if invalidFileRecord.is_valid():
+            invalidFileRecord.save()
+            return(serializedMediaFile.errors, invalidFileRecord.data)
+        else:
+            return(serializedMediaFile.errors, invalidFileRecord.errors)
 
 
 #inFile = '/Users/Jason/Projects/mediamanager/1_min_later.m4v'
