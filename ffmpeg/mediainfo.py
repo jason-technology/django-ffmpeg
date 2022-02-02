@@ -85,7 +85,7 @@ def SerializeMediaFile(inFile):
             invalidFileRecord.save()
             return invalidFileRecord.data
         else:
-            returninvalidFileRecord.errors
+            return invalidFileRecord.errors
      
     
 # info.__dict__ reference
