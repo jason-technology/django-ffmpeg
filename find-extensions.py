@@ -18,6 +18,7 @@ def try_loop(g):
             continue
 
 for file in try_loop(Path(scan_dir).glob('**/*.*')):
+    print(file)
     extension = str(file.suffix)
     if extension not in extensions:
         extensions.append(extension)
