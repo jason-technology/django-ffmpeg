@@ -9,26 +9,26 @@ def SerializeMediaFile(inFile):
     filePath = os.path.dirname(inFile)
     c = Converter()
     #inFile = '/Users/Jason/Projects/mediamanager/1_min_later.m4v'
-    mediaInfo = c.probe(inFile)
     
-    #myProcess = subprocess.check_output(['md5','-q', '-s', str(mediaInfo)], encoding='utf8', text=True)
-    #fileFingerprint = myProcess.replace("\n","")
-    fileFingerprint = hashlib.sha1(str(mediaInfo).encode())
-    
-    #Determine which stream is audio and video
-    
+ 
+    #Determine if file is a valid media file
     try:
+        mediaInfo = c.probe(inFile)
+        fileFingerprint = hashlib.sha1(str(mediaInfo).encode())
         streamTest = mediaInfo.__dict__["streams"][0].__dict__["type"]
-        validMediaFile = True
+    
+        #Determine which stream is audio and video
+        if streamTest == "video":
+            videoStream = 0
+            audioStream = 1
+        else:
+            videoStream = 1
+            audioStream = 0
+            validMediaFile = True
     except:
         validMediaFile = False
     
-    if streamTest == "video":
-        videoStream = 0
-        audioStream = 1
-    else:
-        videoStream = 1
-        audioStream = 0
+
     
     if validMediaFile:
         serializedMediaInfo = {
