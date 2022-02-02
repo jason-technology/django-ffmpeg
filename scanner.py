@@ -35,14 +35,17 @@ def try_loop(g):
             continue
 
 for file in try_loop(Path(scan_dir).glob('**/*.*')):
-    #extension = str(file.suffix)
 
     for extension in valid_extensions:
         if str(file.suffix) == extension:
             print(file)
             filePath = str(file)
             post_data = {"target": filePath}
-            response = requests.get(target_uri, data = post_data)    
-            print(response.json())
-
+            
+            response = requests.get(target_uri, data = post_data)
+            
+            try:   
+                print(response.json())
+            except:
+                continue
     
