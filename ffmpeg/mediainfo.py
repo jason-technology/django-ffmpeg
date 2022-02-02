@@ -28,10 +28,7 @@ def SerializeMediaFile(inFile):
         
     except:
         validMediaFile = False
-        
-        print("not a valid media file")
     
-
     
     if validMediaFile:
         serializedMediaInfo = {
@@ -63,19 +60,15 @@ def SerializeMediaFile(inFile):
         if serializedMediaInfo["kbpm"] is not None:
             serializedMediaInfo["kbpm"] = int(serializedMediaInfo["kbpm"])       
         
-    else:
-        serializedMediaInfo = {}
-     
-    serializedMediaFile = MediaSerializer(data=serializedMediaInfo)
-    
-    #try:
-    #    serializedMediaFile.is_valid(raise_exception=True)
-    #except:
-    #    return SerializeMediaFile.errors
-    
-    if serializedMediaFile.is_valid():
-        serializedMediaFile.save()
-        return serializedMediaFile.data
+        serializedMediaFile = MediaSerializer(data=serializedMediaInfo)
+        
+        if serializedMediaFile.is_valid():
+            serializedMediaFile.save()
+            return serializedMediaFile.data
+        
+        else:
+            return serializedMediaFile.errors
+        
     else:
         rawFingerprint = str(fileName+filePath).encode('utf-8')
         fileFingerprint = hashlib.sha1(rawFingerprint)
@@ -87,23 +80,14 @@ def SerializeMediaFile(inFile):
         }
         
         invalidFileRecord = InvalidMediaSerializer(data=invalidFileData)
+        
         if invalidFileRecord.is_valid():
             invalidFileRecord.save()
-            return(serializedMediaFile.errors, invalidFileRecord.data)
+            return invalidFileRecord.data
         else:
-            return(serializedMediaFile.errors, invalidFileRecord.errors)
-
-
-#inFile = '/Users/Jason/Projects/mediamanager/1_min_later.m4v'
-
-#json_info = SerializeMediaInfo(inFile)
-
-#print(json_info)
-
-#fileFingerprint = subprocess.check_output(['md5','-q', '-s', json_info], encoding='utf8', text=True)
-
-#print(tempData)
-
+            returninvalidFileRecord.errors
+     
+    
 # info.__dict__ reference
 #{
 #    'format': MediaFormatInfo(format=mov,mp4,m4a,3gp,3g2,mj2, duration=2.27), 
