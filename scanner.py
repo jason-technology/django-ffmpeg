@@ -39,7 +39,7 @@ for file in try_loop(Path(scan_dir).glob('**/*.*')):
             print(file)
             path_in_str = str(file)
             post_data = {"target": path_in_str}
-            #response = requests.get(target_uri, data = post_data)
-            #print(response.json())
+            response = requests.get(target_uri, data = post_data)
+            print(response.json())
 
     
