@@ -1,6 +1,6 @@
 from converter import Converter
 import json, os, hashlib
-#from .models import MediaFile
+
 from .serializers import MediaSerializer
 
 def SerializeMediaFile(inFile):
@@ -8,6 +8,7 @@ def SerializeMediaFile(inFile):
     fileName = os.path.basename(inFile)
     filePath = os.path.dirname(inFile)
     mediaInstance = Converter()
+    validMediaFile = None
  
     #Determine if file is a valid media file
     try:
