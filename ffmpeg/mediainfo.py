@@ -76,7 +76,7 @@ def SerializeMediaFile(inFile):
         return serializedMediaFile.data
     else:
         rawFingerprint = str(fileName)
-        fileFingerprint = hashlib.sha1(rawFingerprint).encode()
+        fileFingerprint = hashlib.sha1(rawFingerprint)
         invalidFileData = {
             'filename': fileName,
             'filepath': filePath,

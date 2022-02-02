@@ -30,6 +30,9 @@ def try_loop(g):
         except OSError as e:
             # log error
             continue
+        except IOError as e:
+            # log error
+            continue
 
 for file in try_loop(Path(scan_dir).glob('**/*.*')):
     #extension = str(file.suffix)
