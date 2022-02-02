@@ -7,13 +7,11 @@ def SerializeMediaFile(inFile):
     
     fileName = os.path.basename(inFile)
     filePath = os.path.dirname(inFile)
-    c = Converter()
-    #inFile = '/Users/Jason/Projects/mediamanager/1_min_later.m4v'
-    
+    mediaInstance = Converter()
  
     #Determine if file is a valid media file
     try:
-        mediaInfo = c.probe(inFile)
+        mediaInfo = mediaInstance.probe(inFile)
         fileFingerprint = hashlib.sha1(str(mediaInfo).encode())
         streamTest = mediaInfo.__dict__["streams"][0].__dict__["type"]
     
@@ -27,6 +25,7 @@ def SerializeMediaFile(inFile):
             validMediaFile = True
     except:
         validMediaFile = False
+        print("not a valid media file")
     
 
     
@@ -71,7 +70,6 @@ def SerializeMediaFile(inFile):
         return SerializeMediaFile.error
     
     serializedMediaFile.save()
-    
     return serializedMediaFile.data
 
 

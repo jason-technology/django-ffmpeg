@@ -1,13 +1,11 @@
-import requests
 from pathlib import Path
-
-target_uri = "http://localhost:8000/ffmpeg/getMediaInfo"
+import requests
+from .ffmpeg.mediainfo import SerializeMediaFile
 
 #scan_dir = '/Users/Jason/Projects/mediamanager'
-#scan_dir = '/mnt/media/Movie/Apex (2021)/'
-scan_dir = '/mnt/media/Televison/'
-#scan_dir = "/Users/Jason/"
+scan_dir = '/mnt/media/Television/'
 
+target_uri = "http://localhost:8000/ffmpeg/getMediaInfo"
 
 valid_extensions = [
     '.mp4',
@@ -34,18 +32,16 @@ def try_loop(g):
             # log error
             continue
 
-for path in try_loop(Path(scan_dir).glob('**/*.*')):
+for file in try_loop(Path(scan_dir).glob('**/*.*')):
+    #extension = str(file.suffix)
 
-    print(path)
-#recursive scan of all files
-#pathlist = Path(scan_dir).glob('**/*.*')
-#for path in pathlist:
-    # because path is object not string
     for extension in valid_extensions:
-        if str(path.suffix) == extension:
-            
-            path_in_str = str(path)
+        if str(file.suffix) == extension:
+            print(file)
+            path_in_str = str(file)
             post_data = {"target": path_in_str}
             #response = requests.get(target_uri, data = post_data)
-            #print(response.json())
+            response = SerializeMediaFile(path_in_str)
+            print(response.json())
 
+    
