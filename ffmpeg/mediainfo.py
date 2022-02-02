@@ -62,10 +62,14 @@ def SerializeMediaFile(inFile):
         
     else:
         serializedMediaInfo = {}
-        
+     
     serializedMediaFile = MediaSerializer(data=serializedMediaInfo)
     
-    serializedMediaFile.is_valid(raise_exception=True)
+    try:
+        serializedMediaFile.is_valid(raise_exception=True)
+    except:
+        return SerializeMediaFile.error
+    
     serializedMediaFile.save()
     
     return serializedMediaFile.data
