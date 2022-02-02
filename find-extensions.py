@@ -3,6 +3,8 @@ from pathlib import Path
 #scan_dir = '/Users/Jason/Projects/mediamanager'
 scan_dir = '/mnt/media/Television/'
 
+extensions = []
+
 def try_loop(g):
     while True:
         try:
@@ -17,10 +19,14 @@ def try_loop(g):
 
 #for file in try_loop(pathlib.Path(r'\\path\to\shared\folder').rglob('*.foo')):
 for file in try_loop(Path(scan_dir).glob('**/*.*')):
-    print(file)
-    pass
+    extension = str(file.suffix)
+    if extension not in extensions:
+        extensions.append(extension)
+        
 
-#extensions = []
+for extension in extensions:
+    print(extension)
+
 
 #recursive scan of all files
 #pathlist = Path(scan_dir).glob('**/*.*')
