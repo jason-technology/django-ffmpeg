@@ -43,6 +43,6 @@ class MediaSerializer(serializers.ModelSerializer):
         "video_bitrate": {"required": False},
         "video_fps": {"required": False},
         "lastscan": {"required": False},
-        "fingerprint": {"required": False},
+        "fingerprint": {"required": True},
     }
     
