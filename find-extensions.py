@@ -17,7 +17,6 @@ def try_loop(g):
             # log error
             continue
 
-#for file in try_loop(pathlib.Path(r'\\path\to\shared\folder').rglob('*.foo')):
 for file in try_loop(Path(scan_dir).glob('**/*.*')):
     extension = str(file.suffix)
     if extension not in extensions:
