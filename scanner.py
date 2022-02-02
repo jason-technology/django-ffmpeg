@@ -36,9 +36,9 @@ for file in try_loop(Path(scan_dir).glob('**/*.*')):
     #extension = str(file.suffix)
 
     for extension in valid_extensions:
-        if str(path.suffix) == extension:
+        if str(file.suffix) == extension:
             
-            path_in_str = str(path)
+            path_in_str = str(file)
             post_data = {"target": path_in_str}
             #response = requests.get(target_uri, data = post_data)
             #print(response.json())
