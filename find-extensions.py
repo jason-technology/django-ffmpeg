@@ -1,7 +1,7 @@
 from pathlib import Path
 
 #scan_dir = '/Users/Jason/Projects/mediamanager'
-scan_dir = '/mnt/media/Movie/'
+scan_dir = '/mnt/media/Television/'
 
 def try_loop(g):
     while True:
