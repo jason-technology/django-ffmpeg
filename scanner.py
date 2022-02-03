@@ -29,7 +29,7 @@ def try_loop(g):
             #continue
             #pass
         except Exception as e:
-            print("I encountered Error: "+e)
+            print(e)
             continue
         #except OSError as e:
         #    # log error
