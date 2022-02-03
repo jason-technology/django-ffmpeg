@@ -25,8 +25,8 @@ def try_loop(g):
         try:
             yield next(g)
         except StopIteration:
-            break
-            #continue
+            #break
+            continue
             #pass
         except Exception as e:
             print(e)
@@ -34,9 +34,9 @@ def try_loop(g):
         #except OSError as e:
         #    # log error
         #    continue
-        #except IOError as e:
-        #    # log error
-        #    continue
+        except IOError as e:
+            print(e)
+            continue
 
 for file in try_loop(Path(scan_dir).glob('**/*.*')):
 
