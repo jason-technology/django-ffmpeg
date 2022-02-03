@@ -2,7 +2,8 @@ from pathlib import Path
 import requests
 
 #scan_dir = '/Users/Jason/Projects/mediamanager'
-scan_dir = '/mnt/media/Television/'
+#scan_dir = '/mnt/media/Movie/'
+scan_dir = '/mnt/media/Movie/Return of the Living Dead- Rave to the Grave (2005)/'
 
 target_uri = "http://localhost:8000/ffmpeg/getMediaInfo"
 
@@ -27,12 +28,15 @@ def try_loop(g):
             break
             #continue
             #pass
-        except OSError as e:
-            # log error
+        except Exception as e:
+            print("I encountered Error: "+e)
             continue
-        except IOError as e:
-            # log error
-            continue
+        #except OSError as e:
+        #    # log error
+        #    continue
+        #except IOError as e:
+        #    # log error
+        #    continue
 
 for file in try_loop(Path(scan_dir).glob('**/*.*')):
 
@@ -49,3 +53,6 @@ for file in try_loop(Path(scan_dir).glob('**/*.*')):
             except:
                 continue
     
+
+
+
