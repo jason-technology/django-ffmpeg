@@ -1,9 +1,9 @@
 from pathlib import Path
 import requests
-from ffmpeg.mediainfo import SerializeMediaFile
 
 #scan_dir = '/Users/Jason/Projects/mediamanager'
-scan_dir = '/mnt/media/Television/'
+scan_dir = '/mnt/media/Movie/'
+#scan_dir = '/mnt/media/Movie/Return of the Living Dead- Rave to the Grave (2005)/'
 
 target_uri = "http://localhost:8000/ffmpeg/getMediaInfo"
 
@@ -20,29 +20,37 @@ valid_extensions = [
     '.MP4'
 ]
 
+haveIOError = False
+
 def try_loop(g):
     while True:
         try:
+            for extension in valid_extensions:
+                if str(file.suffix) == extension:
+                    print(file)
+                    filePath = str(file)
+                    post_data = {"target": filePath}
+            
+                    response = requests.get(target_uri, data = post_data)
+            
+                    try:   
+                        print(response.json())
+                    except:
+                        continue
             yield next(g)
         except StopIteration:
+            #This has to be break or the loop will never exit
             break
-            #continue
-            #pass
+        except Exception as e:
+            print(e)
+            continue
         except OSError as e:
-            # log error
+            print(e)
+            continue
+        except IOError as e:
+            print(e)
+            haveIOError = True
             continue
 
 for file in try_loop(Path(scan_dir).glob('**/*.*')):
-    #extension = str(file.suffix)
-
-    for extension in valid_extensions:
-        if str(file.suffix) == extension:
-            print(file)
-            path_in_str = str(file)
-            post_data = {"target": path_in_str}
-            #response = requests.get(target_uri, data = post_data)
-            response = SerializeMediaFile(path_in_str)
-            #print(response.json())
-            print()
-
-    
+    pass
