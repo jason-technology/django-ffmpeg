@@ -25,12 +25,12 @@ def try_loop(g):
         try:
             yield next(g)
         except StopIteration:
-            #break
-            continue
+            break
+            #continue
             #pass
-        except Exception as e:
-            print(e)
-            continue
+        #except Exception as e:
+        #    print(e)
+        #    continue
         #except OSError as e:
         #    # log error
         #    continue
