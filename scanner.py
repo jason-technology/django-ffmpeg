@@ -2,8 +2,8 @@ from pathlib import Path
 import requests
 
 #scan_dir = '/Users/Jason/Projects/mediamanager'
-#scan_dir = '/mnt/media/Movie/'
-scan_dir = '/mnt/media/Movie/Return of the Living Dead- Rave to the Grave (2005)/'
+scan_dir = '/mnt/media/Movie/'
+#scan_dir = '/mnt/media/Movie/Return of the Living Dead- Rave to the Grave (2005)/'
 
 target_uri = "http://localhost:8000/ffmpeg/getMediaInfo"
 
