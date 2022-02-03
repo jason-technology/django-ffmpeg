@@ -25,15 +25,14 @@ def try_loop(g):
         try:
             yield next(g)
         except StopIteration:
+            #This has to be break or the loop will never exit
             break
-            #continue
-            #pass
-        #except Exception as e:
-        #    print(e)
-        #    continue
-        #except OSError as e:
-        #    # log error
-        #    continue
+        except Exception as e:
+            print(e)
+            continue
+        except OSError as e:
+            print(e)
+            continue
         except IOError as e:
             print(e)
             continue
