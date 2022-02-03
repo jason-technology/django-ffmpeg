@@ -20,6 +20,8 @@ valid_extensions = [
     '.MP4'
 ]
 
+haveIOError = False
+
 def try_loop(g):
     while True:
         try:
@@ -35,22 +37,26 @@ def try_loop(g):
             continue
         except IOError as e:
             print(e)
+            haveIOError = True
             continue
 
 for file in try_loop(Path(scan_dir).glob('**/*.*')):
-
-    for extension in valid_extensions:
-        if str(file.suffix) == extension:
-            print(file)
-            filePath = str(file)
-            post_data = {"target": filePath}
+    if haveIOError:
+        haveIOError = False
+        pass
+    else:
+        for extension in valid_extensions:
+            if str(file.suffix) == extension:
+                print(file)
+                filePath = str(file)
+                post_data = {"target": filePath}
             
-            response = requests.get(target_uri, data = post_data)
+                response = requests.get(target_uri, data = post_data)
             
-            try:   
-                print(response.json())
-            except:
-                continue
+                try:   
+                    print(response.json())
+                except:
+                    continue
     
 
 
