@@ -22,10 +22,10 @@ valid_extensions = [
 
 haveIOError = False
 
-def try_loop(g):
+def try_loop(pathFiles):
     while True:
         try:
-            yield next(g)
+            yield next(pathFiles)
         except StopIteration:
             #This has to be break or the loop will never exit
             break
@@ -38,13 +38,11 @@ def try_loop(g):
         except IOError as e:
             print(e)
             haveIOError = True
-            continue
+            #continue
+            yield False
 
 for file in try_loop(Path(scan_dir).glob('**/*.*')):
-    if haveIOError:
-        haveIOError = False
-        pass
-    else:
+    if file:
         for extension in valid_extensions:
             if str(file.suffix) == extension:
                 print(file)
